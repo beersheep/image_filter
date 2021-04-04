@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
@@ -13,8 +13,8 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
-  app.get("/filteredImage", async(req, res) => {
-    const image_url = req.query.image_url;
+  app.get("/filteredImage", async(req: Request, res: Response) => {
+    const image_url:string = req.query.image_url;
     if (!image_url) {
       res.status(422).send('image_url is required');
     }
@@ -30,7 +30,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( _: Request , res: Response ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   
